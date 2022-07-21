@@ -1,5 +1,7 @@
 package tests;
 
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 
@@ -11,8 +13,6 @@ import org.testng.annotations.Test;
 
 import io.restassured.http.ContentType;
 
-import static io.restassured.RestAssured.*;
-
 public class getAndPostExamples {
 	@Test
 	public void testGet() {
@@ -23,7 +23,7 @@ public class getAndPostExamples {
 	}
 @Test
 public void testPost() {
-	Map<String, Object > map = new HashMap<String, Object >();
+	Map<String, Object > map = new HashMap< >();
 	//map.put("name", "Raghav");
 	//map.put("job", "Teacher");
 	//System.out.println(map);
@@ -31,13 +31,13 @@ public void testPost() {
 	request.put("name", "Raghav");
 	request.put("job", "Teacher");
 	System.out.println(request.toJSONString());
-	
+
 	baseURI = "https://reqres.in/api";
 	given().header("Content-Type","application/json").
 	contentType(ContentType.JSON).accept(ContentType.JSON).
 	body(request.toJSONString()).
 	when().post("/users").then().statusCode(201).log().all();
-	
+
 }
 
 }
